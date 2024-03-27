@@ -1,0 +1,56 @@
+import os
+import warnings
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import datetime as dt
+import seaborn as sns
+import re
+import streamlit as st
+import time
+from dataclasses import dataclass
+import locale
+from abc import ABC, abstractmethod # abstract class
+
+
+class Tester:
+    # Datas
+    _uploadedFile = None
+    _df:pd.DataFrame = None
+    
+    # Elements
+    _sidebar = None
+
+    
+    def __init__(self):
+        locale.setlocale(locale.LC_ALL, '')
+        self._uploadedFile = st.file_uploader("파일을 업로드하세요.", 
+                                             type=['xlsx', 'XLSX', 'xls', 'XLS'],
+                                             on_change=self.OnFileUploaded)
+        
+        
+    def OnFileUploaded(self):
+        if self._uploadedFile is None:
+            raise Exception("UploadedFile 이 None 입니다.")
+
+        self._df = pd.read_excel(self.uploadedFile)
+        
+        # df 로드 완료 체크
+        for i in range(0,100):
+            if self.df is not None:
+                self.OnDataReadComplete()
+                break
+            else:
+                time.sleep(3)
+                
+    def OnDataReadComplete(self):
+        self._sidebar = st.sidebar
+        with self._sidebar:
+            st.form_submit_button("파일 리딩 테스트",
+                                  on_click=self.ShowData)                                 
+    
+    def ShowData(self):
+        st.dataframe(self.df)
+            
+            
+do = Tester()
