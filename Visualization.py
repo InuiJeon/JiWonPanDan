@@ -5,8 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime as dt
 import seaborn as sns
-import openpyxl
 import re
+import openpyxl
 import streamlit as st
 import time
 from dataclasses import dataclass
@@ -31,7 +31,7 @@ class Tester:
         
         # 파일 업로드 완료 체크
         for i in range(0,100):
-            if self._uploadedFileA is not None and self._uploadedFileB is not None :
+            if (self._uploadedFileA is not None) and (self._uploadedFileB is not None) :
                 self.OnFileUploaded()
                 break
             else:
@@ -42,18 +42,11 @@ class Tester:
         if self._uploadedFileA is None:
             raise Exception("UploadedFile 이 None 입니다.")
 
-        self._df = pd.read_excel(self._uploadedFileA, engine='openpyxl')
-        self.OnDataReadComplete()
-        
-                
-    def OnDataReadComplete(self):
-        self._sidebar = st.sidebar
-        with self._sidebar:
-            st.form_submit_button("파일 리딩 테스트",
-                                  on_click=self.ShowData)                                 
-    
-    def ShowData(self):
+        self._df = pd.read_excel(self._uploadedFileA)
         st.dataframe(self._df)
+        
+        
             
             
 do = Tester()
+
