@@ -5,5 +5,4 @@ datetime
 seaborn
 streamlit
 dataclasses
-locale
 abc
