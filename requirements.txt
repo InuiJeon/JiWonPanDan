@@ -3,7 +3,6 @@ pandas
 matplotlib
 datetime
 seaborn
-re
 streamlit
 time
 dataclasses
