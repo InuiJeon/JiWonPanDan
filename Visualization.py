@@ -15,7 +15,8 @@ from abc import ABC, abstractmethod # abstract class
 
 class Tester:
     # Datas
-    _uploadedFile = None
+    _uploadedFileA = None
+    _uploadedFileB = None
     _df:pd.DataFrame = None
     
     # Elements
@@ -24,11 +25,12 @@ class Tester:
     
     def __init__(self):
         locale.setlocale(locale.LC_ALL, '')
-        self._uploadedFile = st.file_uploader("파일을 업로드하세요.")
+        self._uploadedFileA = st.file_uploader("지원판단서 가공파일을 업로드하세요.")
+        self._uploadedFileB = st.file_uploader("Order Status 가공파일을 업로드하세요.")
         
         # 파일 업로드 완료 체크
         for i in range(0,100):
-            if self._df is not None:
+            if self._uploadedFileA is not None and self._uploadedFileB is not None :
                 self.OnFileUploaded()
                 break
             else:
@@ -39,7 +41,7 @@ class Tester:
         if self._uploadedFile is None:
             raise Exception("UploadedFile 이 None 입니다.")
 
-        self._df = pd.read_excel(self.uploadedFile)
+        self._df = pd.read_excel(self._uploadedFileA)
         self.OnDataReadComplete()
         
                 
@@ -50,7 +52,7 @@ class Tester:
                                   on_click=self.ShowData)                                 
     
     def ShowData(self):
-        st.dataframe(self.df)
+        st.dataframe(self._df)
             
             
 do = Tester()
