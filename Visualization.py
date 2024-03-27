@@ -24,9 +24,15 @@ class Tester:
     
     def __init__(self):
         locale.setlocale(locale.LC_ALL, '')
-        self._uploadedFile = st.file_uploader("파일을 업로드하세요.", 
-                                             type=['xlsx', 'XLSX', 'xls', 'XLS'],
-                                             on_change=self.OnFileUploaded)
+        self._uploadedFile = st.file_uploader("파일을 업로드하세요.")
+        
+        # 파일 업로드 완료 체크
+        for i in range(0,100):
+            if self.df is not None:
+                self.OnFileUploaded()
+                break
+            else:
+                time.sleep(3)
         
         
     def OnFileUploaded(self):
@@ -34,14 +40,8 @@ class Tester:
             raise Exception("UploadedFile 이 None 입니다.")
 
         self._df = pd.read_excel(self.uploadedFile)
+        self.OnDataReadComplete()
         
-        # df 로드 완료 체크
-        for i in range(0,100):
-            if self.df is not None:
-                self.OnDataReadComplete()
-                break
-            else:
-                time.sleep(3)
                 
     def OnDataReadComplete(self):
         self._sidebar = st.sidebar
