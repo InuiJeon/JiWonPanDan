@@ -1,4 +1,3 @@
-warnings
 numpy
 pandas
 matplotlib
