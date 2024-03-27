@@ -41,7 +41,7 @@ class Tester:
         if self._uploadedFileA is None:
             raise Exception("UploadedFile 이 None 입니다.")
 
-        self._df = pd.read_excel(self._uploadedFileA)
+        self._df = pd.read_excel(self._uploadedFileA, engine='openpyxl')
         self.OnDataReadComplete()
         
                 
