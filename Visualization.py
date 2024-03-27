@@ -28,7 +28,7 @@ class Tester:
         
         # 파일 업로드 완료 체크
         for i in range(0,100):
-            if self.df is not None:
+            if self._df is not None:
                 self.OnFileUploaded()
                 break
             else:
