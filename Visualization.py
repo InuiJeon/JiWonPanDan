@@ -13,7 +13,6 @@ from dataclasses import dataclass
 import locale
 from abc import ABC, abstractmethod # abstract class
 
-
 class Tester:
     # Consts
     DEFAULT_ORDER_LEADTIME : int = 8
